@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shubham Jain - Designer & Brand Strategist</title>
+    <meta name="description" content="Portfolio of Shubham Jain - Designer rooted in clarity and storytelling, crafting bold brands, digital experiences, and lasting value." />
+    <meta name="author" content="Shubham Jain" />
+    <meta name="theme-color" content="#000000" />
+
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Noto+Sans+Devanagari:wght@500&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet" />
+
+    <style>
+      html, body { background:#000; margin:0; }
+      #boot-curtain{
+        position:fixed;inset:0;background:#000;color:#fff;
+        display:flex;align-items:center;justify-content:center;
+        z-index:2147483647;
+        font-family:'Cedarville Cursive', cursive, system-ui;
+        font-size:clamp(2rem, 7vw, 4.5rem);
+        line-height:1;text-align:center;
+        opacity:1;transition:opacity .45s ease;
+        -webkit-font-smoothing:antialiased;
+        text-shadow:0 1px 24px rgba(255,255,255,0.08);
+      }
+      #boot-curtain.hide{opacity:0;pointer-events:none;}
+      #boot-curtain .greet{
+        display:inline-block;opacity:1;transform:translateY(0) scale(1);
+        transition:opacity .35s ease, transform .35s ease;
+        will-change:opacity, transform;
+      }
+      #boot-curtain .greet.out{opacity:0;transform:translateY(-6px) scale(.98);}
+      #boot-curtain .greet.deva{font-family:'Noto Sans Devanagari', system-ui;}
+      #boot-curtain .greet.jp{font-family:'Noto Sans JP', system-ui;}
+    </style>
+
+    <!-- Per-route canonical, Open Graph, Twitter, and JSON-LD are
+         injected by react-helmet-async from each page component. -->
+  </head>
+
+  <body>
+    <div id="boot-curtain" aria-hidden="true"><span class="greet">Hello,</span></div>
+    <script>
+    (function(){
+      var KEY_VERSION = 'v3';
+      var scope = (location.pathname.split('/')[1] || 'root');
+      var key = 'preloader-shown:' + KEY_VERSION + ':' + scope;
+      var el = document.getElementById('boot-curtain');
+      var span = el && el.querySelector('.greet');
+      var dismissed = false;
+
+      function dismiss(){
+        if(dismissed) return; dismissed = true;
+        if(!el) return;
+        try{ sessionStorage.setItem(key,'1'); }catch(e){}
+        el.classList.add('hide');
+        var ref = el; el = null; span = null;
+        setTimeout(function(){ ref && ref.parentNode && ref.parentNode.removeChild(ref); }, 500);
+      }
+      window.__bootCurtainDone = dismiss;
+
+      var seen = false;
+      try { seen = sessionStorage.getItem(key) !== null; } catch(e){}
+      if(seen){ dismiss(); return; }
+
+      var reduced = false;
+      try { reduced = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+      if(reduced){ setTimeout(dismiss, 600); return; }
+
+      var greetings = [
+        {t:'Hello,',     c:''},
+        {t:'नमस्ते,',     c:'deva'},
+        {t:'Bonjour,',   c:''},
+        {t:'こんにちは,', c:'jp'},
+        {t:'Olá,',       c:''}
+      ];
+      var HOLD = 850;
+      var FADE = 350;
+      var i = 0;
+
+      function step(){
+        if(!span){ return; }
+        // fade out current
+        span.classList.add('out');
+        setTimeout(function(){
+          i++;
+          if(i >= greetings.length){ dismiss(); return; }
+          if(!span) return;
+          span.className = 'greet out ' + greetings[i].c;
+          span.textContent = greetings[i].t;
+          // next frame, fade in
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              if(!span) return;
+              span.classList.remove('out');
+              setTimeout(step, HOLD);
+            });
+          });
+        }, FADE);
+      }
+      // first greeting is already painted; hold then advance
+      setTimeout(step, HOLD);
+    })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

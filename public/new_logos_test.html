@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background-color: #222; color: #fff; font-family: sans-serif; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .row { display: flex; border: 1px solid #444; margin-bottom: 20px; padding: 10px; background: #333; }
+    .info { width: 200px; padding: 10px; font-weight: bold; }
+    .view { flex: 1; padding: 20px; display: flex; align-items: center; justify-content: center; }
+    .light { background-color: #ffffff; color: #000; }
+    .dark { background-color: #000000; color: #fff; }
+    img { max-height: 80px; max-width: 90%; object-fit: contain; }
+  </style>
+</head>
+<body>
+  <h1>New Logo Visibility Matrix</h1>
+  <div id="container"></div>
+
+  <script>
+    const files = [
+      "1.png", "2.png", "7.png", "8.png", "B.png", "Black.png", "C.png", 
+      "Dakshiva logo 0.png", "Final.png", "Icon 1.png", "Icon.png", 
+      "Innovators final.png", "logo png.png", "Logo.png", "Mugdog_logo.png", 
+      "Queens (1).svg", "SLM.svg", "White.png", "x.png"
+    ];
+
+    const container = document.getElementById('container');
+    files.forEach(file => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      
+      const info = document.createElement('div');
+      info.className = 'info';
+      info.innerHTML = `<div>${file}</div>`;
+      row.appendChild(info);
+
+      const lightView = document.createElement('div');
+      lightView.className = 'view light';
+      lightView.innerHTML = `<img src="/logos/new/${file}" alt="light" />`;
+      row.appendChild(lightView);
+
+      const darkView = document.createElement('div');
+      darkView.className = 'view dark';
+      darkView.innerHTML = `<img src="/logos/new/${file}" alt="dark" />`;
+      row.appendChild(darkView);
+
+      container.appendChild(row);
+    });
+  </script>
+</body>
+</html>
