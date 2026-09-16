@@ -38,24 +38,28 @@ const MeshGradientBG = ({ subdued = false }: MeshGradientBGProps) => {
     resize();
     window.addEventListener("resize", resize);
 
-    const darkBlobs = [
-      { x: 0.3, y: 0.2, r: 0.45, vx: 0.00012, vy: 0.00008, color: [8, 8, 20] },
-      { x: 0.7, y: 0.8, r: 0.5, vx: -0.0001, vy: 0.00006, color: [10, 15, 40] },
-      { x: 0.5, y: 0.5, r: 0.4, vx: 0.00007, vy: -0.00009, color: [5, 5, 15] },
-      { x: 0.2, y: 0.7, r: 0.35, vx: 0.00009, vy: 0.00011, color: [12, 18, 45] },
+    // Obtain active theme blob colors from theme palette
+    const themeId = document.documentElement.getAttribute("data-theme") || "ivory-charcoal-terracotta";
+    const isLightMode = document.documentElement.classList.contains("light");
+
+    // Dynamic blob palette from active theme
+    const activePalette = (window as any).__shubhamActiveTheme;
+    const blobColors = activePalette?.meshBlobs || (isLightMode
+      ? [[235, 230, 220], [215, 225, 215], [245, 238, 228], [205, 195, 180]]
+      : [[18, 18, 28], [25, 25, 45], [12, 12, 22], [30, 30, 50]]);
+
+    const blobs = [
+      { x: 0.3, y: 0.2, r: 0.45, vx: 0.00012, vy: 0.00008, color: blobColors[0] || [20, 20, 30] },
+      { x: 0.7, y: 0.8, r: 0.5, vx: -0.0001, vy: 0.00006, color: blobColors[1] || [30, 30, 50] },
+      { x: 0.5, y: 0.5, r: 0.4, vx: 0.00007, vy: -0.00009, color: blobColors[2] || [15, 15, 25] },
+      { x: 0.2, y: 0.7, r: 0.35, vx: 0.00009, vy: 0.00011, color: blobColors[3] || [25, 25, 40] },
     ];
 
-    const lightBlobs = [
-      { x: 0.3, y: 0.2, r: 0.45, vx: 0.00012, vy: 0.00008, color: [220, 225, 240] },
-      { x: 0.7, y: 0.8, r: 0.5, vx: -0.0001, vy: 0.00006, color: [210, 218, 235] },
-      { x: 0.5, y: 0.5, r: 0.4, vx: 0.00007, vy: -0.00009, color: [235, 235, 245] },
-      { x: 0.2, y: 0.7, r: 0.35, vx: 0.00009, vy: 0.00011, color: [200, 210, 230] },
-    ];
-
-    const blobs = isLight ? lightBlobs : darkBlobs;
-    const globalAlpha = subdued ? 0.3 : 0.6;
-    const bgColor = isLight ? "#FAFAFA" : "#000000";
-    const compositeOp = isLight ? "multiply" : "screen";
+    const globalAlpha = subdued ? 0.25 : 0.5;
+    // Derive background color directly from computed CSS var
+    const computedBg = activePalette?.preview?.bg || (isLightMode ? "#FAF8F5" : "#0A0A0B");
+    const bgColor = computedBg;
+    const compositeOp = isLightMode ? "multiply" : "screen";
 
     const animate = (time: number) => {
       const cw = canvas.width;

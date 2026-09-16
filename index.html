@@ -40,8 +40,22 @@
       #boot-curtain .greet.jp{font-family:'Noto Sans JP', system-ui;}
     </style>
 
-    <!-- Per-route canonical, Open Graph, Twitter, and JSON-LD are
-         injected by react-helmet-async from each page component. -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('shubham_public_default_theme') || 'ivory-charcoal-terracotta';
+          var preview = sessionStorage.getItem('shubham_active_preview_theme');
+          var activeId = preview || saved;
+          document.documentElement.setAttribute('data-theme', activeId);
+          var lightThemes = ['ivory-charcoal-terracotta', 'offwhite-deepgreen-charcoal', 'warmwhite-burgundy-charcoal', 'matcha-latte-cream', 'sage-warm-stone', 'bauhaus-modernist'];
+          if (lightThemes.indexOf(activeId) !== -1) {
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+          }
+        } catch(e) {}
+      })();
+    </script>
   </head>
 
   <body>
