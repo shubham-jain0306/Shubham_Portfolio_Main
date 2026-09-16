@@ -187,7 +187,7 @@ const FlipbookViewer: React.FC<FlipbookViewerProps> = ({ document, onClose }) =>
           >
             <img
               src={document.pages[currentPage]}
-              alt={`${document.title} — Page ${currentPage + 1} of ${totalPages}`}
+              alt={`${document.title} - Page ${currentPage + 1} of ${totalPages}`}
               className="max-h-[calc(100vh-160px)] max-w-[90vw] md:max-w-[80vw] w-auto h-auto object-contain rounded-lg shadow-2xl ring-1 ring-white/10 select-none"
               draggable={false}
             />

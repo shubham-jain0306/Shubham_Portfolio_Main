@@ -440,7 +440,7 @@ export const THEME_PALETTES: ThemePalette[] = [
     id: "minimalist-monochrome",
     name: "Minimalist Monochrome (Studio Dark)",
     category: "dark",
-    description: "The original timeless gallery contrast — pure dark room black and razor-sharp white.",
+    description: "The original timeless gallery contrast - pure dark room black and razor-sharp white.",
     isLight: false,
     colors: {
       background: "0 0% 0%",

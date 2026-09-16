@@ -83,7 +83,7 @@ export const SocialCarouselViewer: React.FC<SocialCarouselViewerProps> = ({
               >
                 <img
                   src={slideSrc}
-                  alt={`${carousel.title} — Slide ${index + 1}`}
+                  alt={`${carousel.title} - Slide ${index + 1}`}
                   loading={index === 0 ? "eager" : "lazy"}
                   className="w-full h-full object-cover select-none"
                   draggable={false}

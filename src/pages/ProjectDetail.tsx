@@ -93,12 +93,12 @@ const ProjectDetail = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground mb-16">
           {project.title}
         </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground/80 leading-relaxed max-w-4xl mx-auto text-center">
+        <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground/80 leading-relaxed max-w-4xl text-left">
           {project.subtitle}
         </p>
       </section>
 
-      {/* Hero Image — Standard container matching approved baseline */}
+      {/* Hero Image - Standard container matching approved baseline */}
       <section className="max-w-[1200px] mx-auto px-6 sm:px-12 md:px-20 lg:px-6 py-8">
         <p className="text-muted-foreground/50 text-sm mb-4 font-mono">00</p>
         <div className="rounded-lg overflow-hidden">
@@ -118,7 +118,7 @@ const ProjectDetail = () => {
         </p>
       </section>
 
-      {/* Secondary Image — Standard container matching approved baseline */}
+      {/* Secondary Image - Standard container matching approved baseline */}
       {project.secondaryImage && (
         <section className="max-w-[1200px] mx-auto px-6 sm:px-12 md:px-20 lg:px-6 py-8">
           <div className="rounded-lg overflow-hidden">
@@ -259,7 +259,7 @@ const ProjectDetail = () => {
                 <div className="aspect-[3/4] overflow-hidden relative bg-neutral-900/60">
                   <img
                     src={doc.coverImage}
-                    alt={`${doc.title} — Cover`}
+                    alt={`${doc.title} - Cover`}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -459,7 +459,7 @@ const ProjectDetail = () => {
         </DialogContent>
       </Dialog>
 
-      {/* See Also — Standard related projects grid matching approved baseline */}
+      {/* See Also - Standard related projects grid matching approved baseline */}
       <section className="max-w-[1200px] mx-auto px-6 sm:px-12 md:px-20 lg:px-6 py-16">
         <SectionLabel label="see also" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
