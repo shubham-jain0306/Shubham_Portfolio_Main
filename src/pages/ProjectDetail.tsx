@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { BookOpen, Download, ZoomIn } from "lucide-react";
 import { getProject, getRelatedProjects } from "@/data/projects";
@@ -13,6 +13,12 @@ import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+
+  // Redirect legacy /work/meta-ads to the Social Media project page where it is featured
+  if (slug === "meta-ads") {
+    return <Navigate to="/work/roverride" replace />;
+  }
+
   const project = getProject(slug || "");
   const related = getRelatedProjects(slug || "");
   const [activeFlipbook, setActiveFlipbook] = useState<FlipbookDocument | null>(null);
@@ -34,7 +40,6 @@ const ProjectDetail = () => {
   const isSocialMedia = project.slug === "roverride";
   const isPrintPresentation = project.slug === "print-presentation";
   const isDigitalCommunication = project.slug === "digital-communication";
-  const isMetaAds = project.slug === "meta-ads";
 
   const creativeWorkJsonLd = {
     "@context": "https://schema.org",
@@ -400,41 +405,9 @@ const ProjectDetail = () => {
       )}
 
       {/* ─────────────────────────────────────────────────────────────
-          4. STANDALONE META ADS ROUTE VIEW (/work/meta-ads)
+          4. STANDARD GALLERY (For baseline branding & packaging projects)
          ───────────────────────────────────────────────────────────── */}
-      {isMetaAds && (
-        <section className="max-w-[1200px] mx-auto px-6 sm:px-12 md:px-20 lg:px-6 py-8">
-          <SectionLabel label="standalone creative" />
-          <div className="max-w-md mx-auto my-8 rounded-xl overflow-hidden border border-border/70 bg-card/40 shadow-sm">
-            <div className="flex items-center justify-between px-5 py-3 bg-neutral-900/80 border-b border-white/5">
-              <span className="text-[11px] font-mono tracking-wider text-primary font-semibold flex items-center gap-1.5 uppercase">
-                <span className="h-2 w-2 rounded-full bg-primary inline-block" />
-                META AD
-              </span>
-              <span className="text-xs font-mono text-muted-foreground">1:1 Paid Acquisition</span>
-            </div>
-            <div className="aspect-square overflow-hidden bg-neutral-950 flex items-center justify-center">
-              <img
-                src={project.heroImage}
-                alt={project.title}
-                loading="lazy"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="p-5 border-t border-white/5">
-              <p className="text-foreground text-sm font-medium">Meta Paid Campaign Creative</p>
-              <p className="text-muted-foreground text-xs mt-1 leading-relaxed">
-                Standalone creative engineered for instant recognition and conversion across Meta feed placements.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ─────────────────────────────────────────────────────────────
-          5. STANDARD GALLERY (For baseline branding & packaging projects)
-         ───────────────────────────────────────────────────────────── */}
-      {!isSocialMedia && !isPrintPresentation && !isDigitalCommunication && !isMetaAds && project.galleryImages.length > 0 && (
+      {!isSocialMedia && !isPrintPresentation && !isDigitalCommunication && project.galleryImages.length > 0 && (
         <section className="max-w-[1200px] mx-auto px-6 sm:px-12 md:px-20 lg:px-6 py-8 space-y-8">
           {project.galleryImages.map((img) => (
             <div key={img.label}>
