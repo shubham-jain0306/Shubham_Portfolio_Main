@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Palette } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
@@ -91,6 +91,17 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
+            <Link
+              to="/admin/theme"
+              title="Admin Theme Changer"
+              className={`p-2 rounded-full transition-all duration-300 ${
+                isActive("/admin/theme")
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05]"
+              }`}
+            >
+              <Palette size={16} />
+            </Link>
             <ThemeToggle />
           </div>
 
@@ -119,14 +130,23 @@ const Navbar = () => {
               onClick={() => setMobileOpen(false)}
               className={`text-sm tracking-wide transition-all duration-300 ${
                 isActive(item.path)
-                  ? "text-foreground"
+                  ? "text-foreground font-medium"
                   : "text-muted-foreground hover:text-foreground/80"
               }`}
             >
               {item.label}
             </Link>
           ))}
-          <ThemeToggle />
+          <Link
+            to="/admin/theme"
+            onClick={() => setMobileOpen(false)}
+            className="text-sm tracking-wide text-muted-foreground hover:text-foreground/80 flex items-center gap-2 py-1 border-t border-border/50 pt-3"
+          >
+            <Palette size={15} /> Theme Studio (Admin)
+          </Link>
+          <div className="pt-1">
+            <ThemeToggle />
+          </div>
         </div>
       )}
     </nav>
