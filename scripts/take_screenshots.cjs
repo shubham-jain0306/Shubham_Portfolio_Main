@@ -28,6 +28,7 @@ async function captureAll() {
 
   const pagesToCapture = [
     { url: 'http://localhost:8080/', name: 'homepage', fullPage: false },
+    { url: 'http://localhost:8080/work/bizzbuzz', name: 'baseline-psylief', fullPage: false },
     { url: 'http://localhost:8080/work/roverride', name: 'social-media', fullPage: true },
     { url: 'http://localhost:8080/work/meta-ads', name: 'meta-ads', fullPage: true },
     { url: 'http://localhost:8080/work/print-presentation', name: 'print-presentation', fullPage: true },

@@ -74,9 +74,16 @@ const ProjectCard = ({ project }: { project: Project }) => {
           <span className="text-foreground text-xs font-mono tracking-wide">
             {project.year}
           </span>
-          <span className="text-foreground text-xs font-mono tracking-wide">
-            {project.category}
-          </span>
+          <div className="flex items-center gap-2">
+            {project.badge && (
+              <span className="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded-full bg-white/20 text-white font-semibold">
+                {project.badge}
+              </span>
+            )}
+            <span className="text-foreground text-xs font-mono tracking-wide">
+              {project.category}
+            </span>
+          </div>
         </div>
 
         {/* Image with hover scale */}
